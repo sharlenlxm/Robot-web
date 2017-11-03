@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加设备</title>
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/page.css">
+
+</head>
+<body>
+    <div class="outermost">
+        <div class="main-content">
+            <div class="add-content">
+                <form  class="form-horizontal" id="newForm">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">设备类型：</label>
+                        <div class="col-md-3">
+                            <select name="typeId" id="equipmentType" class="form-control">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">设备型号：</label>
+                        <div class="col-md-3">
+                            <select name="modelId" id="equipmentModel" class="form-control">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">设备序列号：<span class="cred">*</span></label>
+                        <div class="col-md-3">
+                            <input name="deviceSquence" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">设备MAC地址：<span class="cred">*</span></label>
+                        <div class="col-md-3">
+                            <input name="mac" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">APPkey：<span class="cred">*</span></label>
+                        <div class="col-md-3">
+                            <input name="appKey" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">设备名称：<span class="cred">*</span></label>
+                        <div class="col-md-3">
+                            <input name="deviceName" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">代理商：</label>
+                        <div class="col-md-3">
+                            <select id="agentId" name="agentId" class="form-control">
+                                <option value="200">OME厂商</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">OME厂商：</label>
+                        <div class="col-md-3">
+                            <select name="oemId" class="form-control">
+                                <option value="200">OME厂商</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">&nbsp;</label>
+                        <div class="col-md-3">
+                            <input id="determine" type="button" value="确定" class="btn btn-primary">
+                            <input type="button" value="取消" class="btn btn-close-dialog-tab" style="color:#fff">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../plugin/jQuery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../../plugin/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../plugin/jqPaginator/jqPaginator.min.js"></script>
+    <script type="text/javascript" src="../../plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../../plugin/jquery-validate/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="../../plugin/jquery-validate/js/messages_cn.js"></script>
+    <script type="text/javascript" src="../../plugin/layer-v3.1.0/layer/layer.js"></script>
+    <script type="text/javascript" src="../../common/common.js"></script>
+    <script type="text/javascript" src="js/fm_add.js"></script>
+</body>
+</html>
