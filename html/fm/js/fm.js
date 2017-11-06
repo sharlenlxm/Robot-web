@@ -13,11 +13,38 @@
 
     $(document).ready(function(){
         list.list(paGe,pageNum);
-
         equipment.types("#equipmentType","#equipmentModel",1);  // 设备类型列表
+
+        // 搜索
         $("#search").on("click",function(){
             list.list(paGe,pageNum);
-        })
+        });
+
+        // 查看
+        $(document).on("click",".toView",function(){
+            list.toView(this);
+        });
+
+        // 删除
+        $(".delete").on("click",function(){
+            detele.multiple();
+        });
+        // 批量导入
+        $(".importData").on("change",function(){
+            batch.importData(this);
+        });
+        // 模板下载
+        $(".expor").on("click",function(){
+            batch.expor(this);
+        });
+        // 批量导出
+        $(".templateExport").on("click",function(){
+            batch.templateExport(this)
+        });
+        // 启用和停用
+        $(".modify").on("click",function(){
+           modify.single($(this).attr('data-bur'));
+        });
     });
 
     /*
@@ -29,8 +56,8 @@
             let pageCount,vpage;   //初始的
             //开始时显示数据
             let dataObject = {
-                page:page,
-                size:size
+                // page:page,
+                // size:size
             };
 
             // 添加搜索条件
@@ -52,27 +79,27 @@
                         let listData = '';
                         $.each(data.data.items,function(i,d){
                             listData += `<tr>
-                            <td><input data-id="${ d.id }" type="checkbox" onclick="checkDown(this)"></td>
-                            <td>${ i + 1 }</td>
-                            <td>${ noTd(d.deviceId) }</td>
-                            <td>${ noTd(d.sequence) }</td>
-                            <td>${ noTd(d.mac) }</td>
-                            <td>${ noTd(d.appKey) }</td>
-                            <td>${ noTd(d.deviceName) }</td>
-                            <td>${ noTd(d.typeName) }</td>
-                            <td>${ noTd(d.modelName) }</td>
-                            <td>${ noTd(d.version) }</td>
-                            <td>${ d.online?'在线':'离线' }</td>
-                            <td>${ noTd(d.agentName) }</td>
-                            <td>${ noTd(d.creator) }</td>
-                            <td>${ noTd(d.createTime) }</td>
-                            <td>${ noTd(d.Ip) }</td>
-                            <td>${ noTd(d.area) }</td>
-                            <td>${ noTd(d.oemName) }</td>
-                            <td class="operating"><a href="assUser.html" class="bg success">查看</a></td>
-                            <td>${ noTd(d.status) }</td>
-                            <td class="operating"><a class="bg success">编辑</a></td>
-                        </tr>`
+                                            <td><input data-id="${ d.id }" type="checkbox" class="notSelectAll"></td>
+                                            <td>${ i + 1 }</td>
+                                            <td>${ noTd(d.id) }</td>
+                                            <td>${ noTd(d.deviceSequence) }</td>
+                                            <td>${ noTd(d.mac) }</td>
+                                            <td>${ noTd(d.appKey) }</td>
+                                            <td>${ noTd(d.deviceName) }</td>
+                                            <td>${ noTd(d.typeName) }</td>
+                                            <td>${ noTd(d.modelName) }</td>
+                                            <td>${ noTd(d.version) }</td>
+                                            <td>${ d.online?'在线':'离线' }</td>
+                                            <td>${ noTd(d.agentName) }</td>
+                                            <td>${ noTd(d.userName) }</td>
+                                            <td>${ noTd(d.createTime) }</td>
+                                            <td>${ noTd(d.ip) }</td>
+                                            <td>${ noTd(d.area) }</td>
+                                            <td>${ noTd(d.oemName) }</td>
+                                            <td class="operating"><a href="assUser.html" class="bg success toView">查看</a></td>
+                                            <td>${ d.status?'在线':d.status===false?'离线':'-' }</td>
+                                            <td class="operating"><a class="bg success">编辑</a></td>
+                                        </tr>`
                         });
                         list.append(listData);
 
@@ -111,14 +138,19 @@
             this.list(paGe,pageNum);
             $(_this).siblings('input').val(num);
         },
+        toView:function(_this){
+            const id = $(_this).parents("tr").find("input[type=checkbox]").attr("data-id");
+            console.log(id);
+            deposited("assUser",id);
+        }
     };
 
     /*
-     *   importData：批量导入、export：导出、templateExport：导入模板下载
+     *   importData：批量导入、expor：导出、templateExport：导入模板下载
      * */
 
     let batch = {
-        export:function(_this){
+        expor:function(_this){
             const form = $("#searchForm").serialize();  //将form序列化
             $(_this).attr({"href": url + robotDevice + version1 + "/device/export?" + form});
         },
@@ -158,7 +190,7 @@
             $(_this).val("");   //清空数据，以防noChange内容不变时，不执行函数
         },
         templateExport:function(_this){
-            $(_this).attr({"href": url + robotDevice + version1 + "/" });
+            $(_this).attr({"href": url + robotDevice + version1 + "/device/export" });
         }
     };
 
@@ -192,12 +224,12 @@
             $.ajax({
                 type:'post',
                 url: url + robotDevice + version1 +'/device/delete',
-                data: {
+                data:JSON.stringify({
                     "userId":userId,
-                    "ids":id.join(",")
-                },
+                    "deviceIds":id.join(",")
+                }),
                 dataType:'json',
-                // traditional:true,
+                contentType: 'application/json',
                 success:function(data){
                     if(data.code === 0){
                         layer.msg('删除成功');
@@ -218,66 +250,51 @@
 
     /*
      *   停用和启用，分为单个和批量
+     *   status：true，false ； id：数组格式
      * */
 
     let modify = {
         single:function(status){
-            let dataID = $('#lebel_tab tbody input[type=checkbox]:checked');   //单选按钮
+            const dataID = $('#list_tab tbody input[type=checkbox]:checked');   //单选按钮
             let id = [];
             $.each(dataID,function(index,val){
                 id.push($(val).attr("data-id"));   //获取id
             });
-            onOFF(id,status);   //调用函数
-        },
-        multiple:function(wo,status){
-            let self = wo;
-            switch (status){
-                case 0:
-                    let id1 = [$(self).parents("tr").find("input[type=checkbox]").attr("data-id")];
-                    onOFF(id1,status);
-                    break;
-                case 1:
-                    let id2 = [$(self).parents("tr").find("input[type=checkbox]").attr("data-id")];
-                    onOFF(id2,status);
-                    break;
+            if(id.length <= 0){
+                layer.msg('请选择设备！');
+                return false;
             }
+            modify.transfer(id,status);
+        },
+        multiple:function(_this,status){
+            let id = [$(_this).parents("tr").find("input[type=checkbox]").attr("data-id")];
+            modify.transfer(id,status);
         },
         transfer:function(id,status){
             $.ajax({
                 type:'post',
-                url: DMBServer_url + '/web/api/exams/status.json',
-                data:{
-                    ids	:id,    //台账模板ID，数组
-                    status:status  //状态, 0:禁用,1:启用
-                },
+                url: url + robotDevice + version1 + '/device/modifyStatus',
+                data:JSON.stringify({
+                    ids	:4,
+                    status:status,
+                    userId:userId
+                }),
                 dataType:'json',
-                traditional:true,
+                contentType: 'application/json',
                 success:function(data){
-                    if(data.code === 0){
+                    if(data.code === 200){
                         switch (status){
-                            case 0:
-                                //启用成功
-                                returnMessage(1,'取消成功！');
-                                break;
-                            case 1:
-                                //禁用成功
-                                returnMessage(1,'发布成功！');
-                                break;
+                            case "1":  layer.msg('启用成功！'); break;
+                            case "0": layer.msg('停用成功！'); break;
                         }
-                        $("#lebel_tab thead th:first input").removeAttr("checked");
-                        label(paGe,pageNum,keyword);
                     }else{
-                        //无数据提醒框
-                        returnMessage(2,'修改失败！');
+                        layer.msg(data.message);
                     }
                 },
-                error:function(data){
-                    //报错提醒框
-                    returnMessage(2,'报错：' + data.status);
-                }
+                error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
             });
         }
-    }
+    };
 
 
     /*  导入成功导入失败

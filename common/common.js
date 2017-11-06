@@ -3,19 +3,83 @@
     *   url：ip
     * */
     var url = ""
-        // ,robotDevice = "/robot-device"  // 设备
-        ,robotDevice = ""  // 设备
-        // ,robotAgent = "/robot-agent"  // 代理商
-        // ,robotCore = "/robot-core"   // 公共
-        ,robotAgent = ""  // 代理商
+        ,robotDevice = "/robot-device"  // 设备
+        // ,robotDevice = ""  // 设备
+        ,robotAgent = "/robot-agent"  // 代理商
+        ,robotCore = "/robot-core"   // 公共
+        // ,robotAgent = ""  // 代理商
         ,version1 = "/api/v1"   // 版本
         ,userId = "1982"
+        ,agentId = "100"
+
+
+    $(function(){
+
+        /*
+        *   全选函数 不全选函数
+        * */
+        $("#list_tab").on("click",".selectAll",function(){
+            check.checkAll('list_tab',this);
+        });
+        $(document).on("click","#list_tab .notSelectAll",function(){
+            check.checkDown(this);
+        });
+        /*
+         *   跳转
+         * */
+
+        $(".jump").on("click",function(){
+            list.pageTo(this);
+        });
+
+
+    });
+
+
+    /*
+     *   开启,关闭选择代理商弹出层
+     *   给每个需要开启或关闭的元素添加onOff类名和data-onOff属性，data-onOff存放需要开启或者关闭的id名
+     *   ele：执行的事件 ; character：点击的类名
+     * */
+    let onOff = {
+        open:function (character,ele){
+            this.dealWith(character,ele);
+        },
+        down:function (character,ele){
+            this.dealWith(character,ele);
+        },
+        dealWith:function(character,ele){
+            $(character).on("click",function(){
+                ele(this);
+            });
+        }
+    };
 
 
     // 报错提示
     function beingGiven(XMLHttpRequest, textStatus, errorThrown){
         /* readyState :当前状态,0-未初始化，1-正在载入，2-已经载入，3-数据进行交互，4-完成; status：返回的HTTP状态码; statusText：对应状态码的错误信息*/
         console.log("当前状态：" + XMLHttpRequest.readyState + " 状态码：" + XMLHttpRequest.status + " 错误信息：" + errorThrown);
+    }
+
+    /*
+    *    本地存储
+    *    deposited：将值存入dataSession
+    *    obtain：获取dataSession值
+    *    dataSession：本地存储对象,添加判断，以继承本地存储内数据；如果没有本地存储则创建一个对象；
+    * */
+
+    let robot = localStorage.getItem("robot")?JSON.parse(localStorage.getItem("robot")):{};
+    function deposited(name,value){
+        robot[""+ name +""] = value;
+        localStorage.setItem("robot",JSON.stringify(robot));
+    }
+    function obtain(name){
+        let data = "";
+        if(localStorage.getItem("robot")){
+            data = JSON.parse(localStorage.getItem("robot"))[name];
+        }
+        return data;
     }
 
 
@@ -190,14 +254,35 @@
         $(".content").hide();
         $("."+id).removeClass("hide");
     }
-    //全选函数
-    function checkAll(id,_this){
-        if(_this.checked){
-            $("#"+id+" .list :checkbox").prop("checked", true);
-        }else{
-            $("#"+id+" .list :checkbox").prop("checked", false);
+
+    /*
+    *   列表全选，和取消全选
+    * */
+    let check = {
+        checkAll:function(id,_this){
+            if(_this.checked){
+                $("#"+id+" tbody :checkbox").prop("checked", true);
+            }else{
+                $("#"+id+" tbody :checkbox").prop("checked", false);
+            }
+        },
+        checkDown:function(_this){
+            const all = $(_this).parents("tbody").siblings("thead").find("input[type=checkbox]");
+            if(_this.checked){
+                let bur = true;
+                $.each($(_this).parents("tr").siblings().find("input[type=checkbox]"),function(index,val){
+                    if(!val.checked){
+                        bur = false;
+                    }
+                });
+                if(bur){
+                    all.prop("checked", true);
+                }
+            }else{
+                all.prop("checked", false);
+            }
         }
-    }
+    };
 
     /*上传图片预览*/
     function imgPreview(_this){
@@ -267,24 +352,6 @@
         }
     }
 
-    //  列表全选，则全选显示；列表不全选，则全选不显示；
-    function checkDown(_this){
-        var all = $(_this).parents("tbody").siblings("thead").find("input[type=checkbox]");  //将全选的按钮赋值给all
-        if(_this.checked){
-            var bur = true;
-            $.each($(_this).parents("tr").siblings().find("input[type=checkbox]"),function(index,val){
-                //  看列表是否全选
-                if(!val.checked){
-                    bur = false;
-                }
-            });
-            if(bur){
-                all.prop("checked", true);
-            }
-        }else{
-            all.prop("checked", false);
-        }
-    }
 
 
 

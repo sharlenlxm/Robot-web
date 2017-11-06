@@ -70,6 +70,8 @@
                         <td>
                             <select name="Status" class="form-control">
                                 <option value="">全部</option>
+                                <option value="true">已启用</option>
+                                <option value="false">已停用</option>
                             </select>
                         </td>
                         <td><input id="search" type="button" class="btn btn-primary" value="搜索"></td>
@@ -83,20 +85,20 @@
             <div class="con-oper">
                 <form class="form " id="Import"  enctype="multipart/form-data">
                     <a href="fm_add.html" class="btn bg-info">添加新设备</a>
-                    <input type="file" name="file" onchange="batch.importData(this)" class="import-wrap FileImport">
+                    <input type="file" name="file" class="import-wrap FileImport importData">
                     <a class="btn bg-info">批量导入</a>
-                    <a onclick="batch.templateExport(this)" class="btn bg-info">导入模板下载</a>
-                    <a onclick="batch.export(this)" class="btn bg-info">批量导出</a>
-                    <input class="btn bg-success" type="button" value="启用">
-                    <input class="btn bg-success" type="button" value="停用">
-                    <input onclick="detele.multiple()" class="btn bg-danger" type="button" value="删除">
+                    <a class="btn bg-info expor">导入模板下载</a>
+                    <a class="btn bg-info templateExport">批量导出</a>
+                    <input data-bur = "1" class="btn bg-success modify" type="button" value="启用">
+                    <input data-bur = "0" class="btn bg-success modify" type="button" value="停用">
+                    <input class="btn bg-danger delete" type="button" value="删除">
                 </form>
             </div>
             <div class="con-table">
                 <table class="table table-hover" id="list_tab">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" onclick="checkAll('list_tab',this)"></th>
+                        <th><input type="checkbox" class="selectAll"></th>
                         <th>序号</th>
                         <th>设备ID</th>
                         <th>设备序列号</th>
@@ -120,7 +122,7 @@
                     </thead>
                     <tbody class="list">
                         <tr>
-                            <td><input type="checkbox" onclick="checkAll('list_tab',this)"></td>
+                            <td><input type="checkbox" class="notSelectAll"></td>
                             <td>1</td>
                             <td>设备ID</td>
                             <td>设备序列号</td>
@@ -148,7 +150,7 @@
                     <div class="pageGo">
                         <span>跳转到</span>
                         <input type="number" min="1">
-                        <input type="button" value="GO" onclick="pageTo(this)">
+                        <input type="button" value="GO" class="jump">
                     </div>
                 </div>
             </div>
@@ -171,7 +173,7 @@
                             </tbody>
                         </table>
                         <div class="text-center" style="    position: absolute;width: 100%;bottom: 50px;left: 0;">
-                            <input type="button" value="关闭" class="btn" style="color:#fff" onclick="importDown()">
+                            <input type="button" value="关闭" class="btn" style="color:#fff">
                         </div>
                     </div>
                 </div>
