@@ -225,3 +225,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .FileImport{  border: 0;  background: #fff;  width: 81px;  height: 34px;  opacity: 0;  position: absolute;  display:inline-block!important;  overflow:hidden;  }
 .operating{ display: flex;justify-content: space-around; align-items:center;margin-top: 3px;}
 .operating a{ cursor:pointer;}
+
+/* 代理商管理列表 upgrade.html */
+#addAgents .main-content{ min-height: inherit; }
+.superiorList{ display: none; }

@@ -5,7 +5,7 @@ $(document).ready(function(){
     const newForm = $("#newForm");
     newForm.on("click","#determine",function(){
         if(newForm.valid()){
-            var form = new FormData(newForm[0]);       //需要是JS对象
+            let form = new FormData(newForm[0]);       //需要是JS对象
             form.append("userId",userId);
             $.ajax({
                 type:'post',
