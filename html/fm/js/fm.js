@@ -6,11 +6,6 @@
     // 调用关联时间初始化
     associationTime("#startTime","#endTime");
 
-    let pageNum = 10//每次页数
-        ,paGe = 1   //第几页  修改时，出现在被修改页面
-        ,keyword = []  //搜索内容
-        ,flag = null;   // 分页赋值
-
     $(document).ready(function(){
         list.list(paGe,pageNum);
         equipment.types("#equipmentType","#equipmentModel",1);  // 设备类型列表
@@ -22,6 +17,10 @@
 
         // 查看
         $(document).on("click",".toView",function(){
+            list.toView(this);
+        });
+        // 编辑
+        $(document).on("click",".edit",function(){
             list.toView(this);
         });
 
@@ -56,8 +55,8 @@
             let pageCount,vpage;   //初始的
             //开始时显示数据
             let dataObject = {
-                // page:page,
-                // size:size
+                page:page,
+                size:size
             };
 
             // 添加搜索条件
@@ -97,8 +96,8 @@
                                             <td>${ noTd(d.area) }</td>
                                             <td>${ noTd(d.oemName) }</td>
                                             <td class="operating"><a href="assUser.html" class="bg success toView">查看</a></td>
-                                            <td>${ d.status?'在线':d.status===false?'离线':'-' }</td>
-                                            <td class="operating"><a class="bg success">编辑</a></td>
+                                            <td>${ d.status?'已启用':d.status===false?'已停用':'-' }</td>
+                                            <td class="operating"><a href="fm_edit.html" class="bg success edit">编辑</a></td>
                                         </tr>`
                         });
                         list.append(listData);
@@ -109,10 +108,10 @@
                         if(pageCount>1){
                             $('.pages').show();
                             flag = true;
-                            initPagination('#pagination',pageCount,vpage,page + 1,function(num,type){
+                            initPagination('#pagination',pageCount,vpage,page,function(num,type){
                                 if(type === 'change'){
-                                    paGe = num - 1;
-                                    list.list(paGe,pageNum);
+                                    paGe = num;
+                                    self.list(paGe,pageNum);
                                 }
                             });
                         }else{
@@ -129,6 +128,7 @@
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
             });
+            $("#list_tab thead td:first input").prop("checked",false);
         },
         pageTo:function(_this){
             const max = parseInt($(_this).parents('.pageGo').siblings('.pagination').find('li.next').prev().text());
@@ -140,8 +140,11 @@
         },
         toView:function(_this){
             const id = $(_this).parents("tr").find("input[type=checkbox]").attr("data-id");
-            console.log(id);
-            deposited("assUser",id);
+            deposited("id",id);
+        },
+        edit:function(_this){
+            const id = $(_this).parents("tr").find("input[type=checkbox]").attr("data-id");
+            deposited("id",id);
         }
     };
 
@@ -151,7 +154,7 @@
 
     let batch = {
         expor:function(_this){
-            const form = $("#searchForm").serialize();  //将form序列化
+            const form = $("#newForm").serialize();  //将form序列化
             $(_this).attr({"href": url + robotDevice + version1 + "/device/export?" + form});
         },
         importData:function(_this){
@@ -173,8 +176,9 @@
                 contentType: false,
                 processData: false,
                 success:function(data){
-                    if(data.code === 0){
+                    if(data.code === 200){
                         layer.msg('添加成功');
+                        list.list(paGe,pageNum);
                     }else{
                         layer.msg(data.message);
                     }
@@ -231,8 +235,9 @@
                 dataType:'json',
                 contentType: 'application/json',
                 success:function(data){
-                    if(data.code === 0){
+                    if(data.code === 200){
                         layer.msg('删除成功');
+                        list.list(paGe,pageNum);
                     }else{
                         layer.msg(data.message);
                     }
@@ -275,7 +280,7 @@
                 type:'post',
                 url: url + robotDevice + version1 + '/device/modifyStatus',
                 data:JSON.stringify({
-                    ids	:4,
+                    ids	:id.join(","),
                     status:status,
                     userId:userId
                 }),
@@ -287,6 +292,7 @@
                             case "1":  layer.msg('启用成功！'); break;
                             case "0": layer.msg('停用成功！'); break;
                         }
+                        list.list(paGe,pageNum);
                     }else{
                         layer.msg(data.message);
                     }

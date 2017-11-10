@@ -10,8 +10,15 @@
         // ,robotAgent = ""  // 代理商
         ,version1 = "/api/v1"   // 版本
         ,userId = "1982"
-        ,agentId = "100"
+        ,agentId = "1762";
 
+
+
+
+
+    let pageNum = 10,   //每次页数
+         paGe = 1,   //第几页  修改时，出现在被修改页面
+         flag = null;   // 分页赋值
 
     $(function(){
 
@@ -87,12 +94,12 @@
      *  传参：元素字符串,index：为1时有全部；idNameType：类型名；idNameModel：型号名
      *
      *  model：设备型号列表
-     *  传参：元素字符串,index：为1时有全部；idNameModel：型号名，typeId：类型ID
+     *  传参：元素字符串,index：为1时有全部；idNameModel：型号名，typeId：类型ID , 如果correspond相等，则突出显示
      *  设备类型为全部，不显示设备型号
      *
      * */
     var equipment = {
-        types:function(idNameType,idNameModel,index){
+        types:function(idNameType,idNameModel,index,correspond){
             $.ajax({
                 type:'get',
                 url: url + robotDevice + version1 +'/device/type/list',
@@ -102,7 +109,11 @@
                     if(data.code === 200){
                         var listData = index === 1?'<option value="">全部</option>':'';
                         $.each(data.data,function(i,d){
-                            listData += '<option value="'+ d.id +'">'+ d.typeName +'</option>';
+                            if(d.id === correspond){
+                                listData += '<option selected value="'+ d.id +'">'+ d.typeName +'</option>';
+                            }else{
+                                listData += '<option value="'+ d.id +'">'+ d.typeName +'</option>';
+                            }
                             if(!(index === 1) && i === 0){
                                 equipment.model(idNameModel,d.id,0); // 设备型号列表
                             }
@@ -128,7 +139,7 @@
                 }
             })
         },
-        model:function(idNameModel,typeId,index){
+        model:function(idNameModel,typeId,index,correspond){
             if(typeId.length <= 0){
                 return;
             }
@@ -144,7 +155,11 @@
                     if(data.code === 200){
                         var listData = index === 1?'<option value="">全部</option>':'';
                         $.each(data.data,function(i,d){
-                            listData += '<option value="'+ d.id +'">'+ d.modelName +'</option>';
+                            if(d.id === correspond){
+                                listData += '<option selected value="'+ d.id +'">'+ d.modelName +'</option>';
+                            }else{
+                                listData += '<option value="'+ d.id +'">'+ d.modelName +'</option>';
+                            }
                         });
                         list.append(listData);
                     }
@@ -158,6 +173,28 @@
     *   传参：元素字符串,index：为1时有全部；idNameAgents：类型名
     * */
     function agents(idNameAgents,index){
+        $.ajax({
+            type:'get',
+            url: url + robotAgent + version1 +'/agent/list.json',
+            dataType:'json',
+            success:function(data){
+                const list = $(idNameAgents).empty();  //将选择器赋值给常量 清空
+                if(data.code === 200){
+                    var listData = index === 1?'<option value="">全部</option>':'';
+                    $.each(data.data.items,function(i,d){
+                        listData += '<option value="'+ d.agentId +'">'+ d.agentName +'</option>';
+                    });
+                    list.append(listData);
+                }
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
+        });
+    }
+    /*
+     *   OME厂商
+     *   传参：元素字符串,index：为1时有全部；idNameAgents：类型名
+     * */
+    function ome(idNameAgents,index){
         $.ajax({
             type:'get',
             url: url + robotAgent + version1 +'/agent/list.json',

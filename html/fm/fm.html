@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>设备管理列表</title>
+    <title>设备列表</title>
     <link rel="stylesheet" type="text/css" href="../../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../plugin/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/page.css">
@@ -11,22 +12,23 @@
 </head>
 <body>
     <div class="outermost">
+        <header class="header-title">
+            <i class="fa fa-hand-o-right"></i><b>您的位置:</b> <span>设备管理</span> &gt; <span class="blueChange">设备列表</span>
+        </header>
         <div class="search-tab-box">
             <form class="form" id="newForm">
                 <table>
                     <tbody>
                     <tr class="col-lg-12 input-sm">
-                        <td><input name="deviceId" type="text" placeholder="设备序列号" class="form-control"></td>
+                        <td><input name="deviceSequence" type="text" placeholder="设备序列号" class="form-control"></td>
                         <td><label></label></td>
                         <td><input name="deviceName" type="text" placeholder="设备名称" class="form-control"></td>
                         <td><label></label></td>
                         <td><input name="oemName" type="text" placeholder="所属OEM厂家" class="form-control"></td>
                         <td><label></label></td>
-                        <td><input name="deviceName" type="text" placeholder="代理商" class="form-control"></td>
+                        <td><input name="agentName" type="text" placeholder="代理商" class="form-control"></td>
                         <td><label></label></td>
                         <td><input name="version" type="text" placeholder="固件版本号" class="form-control"></td>
-                        <td><label></label></td>
-                        <td><input name="deviceName" type="text" placeholder="设备序列号" class="form-control"></td>
                         <td><label class="label4">创建时间：</label></td>
                         <td>
                             <div class="date form_datetime start-time form_datetime_input">
@@ -48,13 +50,13 @@
                     <tr class="col-lg-12 input-sm">
                         <td><label for="equipmentType">设备类型：</label></td>
                         <td>
-                            <select name="deviceTypeId" id="equipmentType" class="form-control">
+                            <select name="typeId" id="equipmentType" class="form-control">
                                 <option  value="">全部</option>
                             </select>
                         </td>
                         <td><label for="equipmentModel">设备型号：</label></td>
                         <td>
-                            <select name="deviceModelId" id="equipmentModel" class="form-control">
+                            <select name="modelId" id="equipmentModel" class="form-control">
                                 <option value="">全部</option>
                             </select>
                         </td>
@@ -62,16 +64,16 @@
                         <td>
                             <select name="online" class="form-control">
                                 <option value="">全部</option>
-                                <option value="true">在线</option>
-                                <option value="false">离线</option>
+                                <option value="1">在线</option>
+                                <option value="0">离线</option>
                             </select>
                         </td>
                         <td><label>设备状态：</label></td>
                         <td>
-                            <select name="Status" class="form-control">
+                            <select name="status" class="form-control">
                                 <option value="">全部</option>
-                                <option value="true">已启用</option>
-                                <option value="false">已停用</option>
+                                <option value="1">已启用</option>
+                                <option value="0">已停用</option>
                             </select>
                         </td>
                         <td><input id="search" type="button" class="btn btn-primary" value="搜索"></td>
@@ -87,8 +89,8 @@
                     <a href="fm_add.html" class="btn bg-info">添加新设备</a>
                     <input type="file" name="file" class="import-wrap FileImport importData">
                     <a class="btn bg-info">批量导入</a>
-                    <a class="btn bg-info expor">导入模板下载</a>
-                    <a class="btn bg-info templateExport">批量导出</a>
+                    <!--<a class="btn bg-info templateExport">导入模板下载</a>-->
+                    <a class="btn bg-info  expor">批量导出</a>
                     <input data-bur = "1" class="btn bg-success modify" type="button" value="启用">
                     <input data-bur = "0" class="btn bg-success modify" type="button" value="停用">
                     <input class="btn bg-danger delete" type="button" value="删除">
@@ -121,28 +123,28 @@
                     </tr>
                     </thead>
                     <tbody class="list">
-                        <tr>
-                            <td><input type="checkbox" class="notSelectAll"></td>
-                            <td>1</td>
-                            <td>设备ID</td>
-                            <td>设备序列号</td>
-                            <td>设备MAC地址</td>
-                            <td>APPkey</td>
-                            <td>设备名称</td>
-                            <td>设备类型</td>
-                            <td>设备型号</td>
-                            <td>设备固件版本号</td>
-                            <td>在线状态</td>
-                            <td>代理商</td>
-                            <td>创建人</td>
-                            <td>创建时间</td>
-                            <td>IP地址</td>
-                            <td>所在地区</td>
-                            <td>OEM厂商</td>
-                            <td class="operating"><a class="bg success">查看</a></td>
-                            <td>状态</td>
-                            <td class="operating"><a class="bg success">编辑</a></td>
-                        </tr>
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox" class="notSelectAll"></td>-->
+                            <!--<td>1</td>-->
+                            <!--<td>设备ID</td>-->
+                            <!--<td>设备序列号</td>-->
+                            <!--<td>设备MAC地址</td>-->
+                            <!--<td>APPkey</td>-->
+                            <!--<td>设备名称</td>-->
+                            <!--<td>设备类型</td>-->
+                            <!--<td>设备型号</td>-->
+                            <!--<td>设备固件版本号</td>-->
+                            <!--<td>在线状态</td>-->
+                            <!--<td>代理商</td>-->
+                            <!--<td>创建人</td>-->
+                            <!--<td>创建时间</td>-->
+                            <!--<td>IP地址</td>-->
+                            <!--<td>所在地区</td>-->
+                            <!--<td>OEM厂商</td>-->
+                            <!--<td class="operating"><a class="bg success">查看</a></td>-->
+                            <!--<td>状态</td>-->
+                            <!--<td class="operating"><a class="bg success">编辑</a></td>-->
+                        <!--</tr>-->
                     </tbody>
                 </table>
                 <div class="pages ml20 undis">
@@ -186,6 +188,7 @@
     <script type="text/javascript" src="../../plugin/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../plugin/jqPaginator/jqPaginator.min.js"></script>
     <script type="text/javascript" src="../../plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../../plugin/bootstrap-datetimepicker/font/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="../../plugin/layer-v3.1.0/layer/layer.js"></script>
     <script type="text/javascript" src="../../common/common.js"></script>
     <script type="text/javascript" src="js/fm.js"></script>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>代理商管理列表</title>
     <link rel="stylesheet" type="text/css" href="../../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../plugin/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="../../plugin/zTree/css/zTreeStyle/zTreeStyle.css">
@@ -12,6 +13,9 @@
 </head>
 <body>
 <div class="outermost">
+    <header class="header-title">
+        <i class="fa fa-hand-o-right"></i><b>您的位置:</b> <span>代理商管理</span> &gt; <span class="blueChange">代理商列表</span>
+    </header>
     <div class="search-tab-box">
         <form class="form" id="newForm">
             <table>
@@ -86,7 +90,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="pages ml20 undis">
+            <div id="pagesA" class="pages ml20 undis">
                 <div class="pagination" id="pagination"></div>
                 <div class="pageGo">
                     <span>跳转到</span>
@@ -162,7 +166,7 @@
                         <div class="form-group">
                             <label class="col-md-1 control-label"></label>
                             <div class="col-md-5">
-                                <input name="deviceSquence" type="text" class="form-control" required>
+                                <input id="keyword" type="text" class="form-control" required>
                             </div>
                             <label class="col-md-3">
                                 <td><input type="button" class="btn btn-primary" value="搜索"></td>
@@ -170,7 +174,7 @@
                         </div>
                         <div class="form-group">
                             <div class="main-content">
-                                <div class="con-table">
+                                <div id="companyList" class="con-table">
                                     <table class="table table-hover" id="agents_list_table">
                                         <thead>
                                         <tr>
@@ -198,14 +202,6 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="pages ml20 undis">
-                                        <div class="pagination"></div>
-                                        <div class="pageGo">
-                                            <span>跳转到</span>
-                                            <input type="number" min="1">
-                                            <input type="button" value="GO" class="jump">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

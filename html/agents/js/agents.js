@@ -1,9 +1,4 @@
 
-    let pageNum = 10//每次页数
-        ,paGe = 1   //第几页  修改时，出现在被修改页面
-        ,keyword = []  //搜索内容
-        ,flag = null;   // 分页赋值
-
     let setting = {
         data : {
             key:{
@@ -89,6 +84,9 @@
 
                 age.id = ids.attr("data-id");
             }
+            if(id === "#addAgents"){
+                companyList.list();
+            }
             $(id).toggleClass("show");
         });
         onOff.down(".down",function(_this){
@@ -102,6 +100,7 @@
 
     let list = {
         list:function(page,size){
+            var self = this;
             let pageCount,vpage;   //初始的
             //开始时显示数据
             let dataObject = {
@@ -149,24 +148,24 @@
                         pageCount = data.data.totalPages;
                         vpage = pageCount>10?10:pageCount;
                         if(pageCount>1){
-                            $('.pages').show();
+                            $('#pagesA').show();
                             flag = true;
-                            initPagination('#pagination',pageCount,vpage,page + 1,function(num,type){
+                            initPagination('#pagination',pageCount,vpage,page,function(num,type){
                                 if(type === 'change'){
-                                    paGe = num - 1;
-                                    list.list(paGe,pageNum);
+                                    paGe = num;
+                                    self.list(paGe,pageNum);
                                 }
                             });
                         }else{
                             if(flag){
                                 paGe = 0;
-                                list.list(paGe,pageNum);
+                                self.list(paGe,pageNum);
                                 flag = false;
-                                $('.pages').hide();
+                                $('#pagesA').hide();
                             }
                         }
                     }else{
-                        $('.pages').hide();
+                        $('#pagesA').hide();
                     }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
@@ -182,7 +181,6 @@
         },
         toView:function(_this){
             const agentId = $(_this).parents("tr").find("td:first input").attr("data-id");
-            console.log(agentId);
             $.ajax({
                 type:'get',
                 url: url + robotAgent + version1 +'/agent/device.json',
@@ -225,88 +223,40 @@
 
 
     /*
-    *   添加代理商 --- 公司列表
-    * */
+     *   公司列表
+     * */
+
     let companyList = {
-        list:function(page,size){
-            let pageCount,vpage;   //初始的
+        list:function(){
             //开始时显示数据
             let dataObject = {
-                page:page,
-                size:size
+                "keyword":$("#keyword").val(),
             };
-
-            // 添加搜索条件
-            $.each($('#newForm .form-control'),function(index,val){
-                if($(val).val().length > 0){
-                    dataObject[$(val).attr("name")] = $(val).val();
-                }
-            });
-
             $.ajax({
                 type:'get',
-                url: url + robotAgent + version1 +'/agent/list.json',
+                url: url + robotAgent + version1 +'/agent/firm/list.json',
                 data:dataObject,
                 dataType:'json',
                 success:function(data){
-                    const list = $(".list");  //将选择器赋值给常量
+                    const list = $("#agents_list_table .list");  //将选择器赋值给常量
                     list.empty();  //清空
                     if(data.code === 200){
                         let listData = '';
-                        $.each(data.data.items,function(i,d){
+                        $.each(data.data,function(i,d){
                             listData += `<tr>
-                                    <td><input type="checkbox" class="notSelectAll"></td>
                                     <td>${ i + 1 }</td>
-                                    <td>${ noTd(d.agentUsername) }</td>
-                                    <td>${ noTd(d.agentName) }</td>
-                                    <td class="operating"><a href="javascript:" class="bg success toView">查看</a></td>
-                                    <td>${ agentsLevel(d.level) }</td>
-                                    <td>${ noTd(d.ratio) }%</td>
-                                    <td>${ noTd(d.linkName) }</td>
-                                    <td>${ noTd(d.phone) }</td>
-                                    <td>${ noTd(d.email) }</td>
+                                    <td>${ noTd(d.name) }</td>
                                     <td>${ noTd(d.address) }</td>
-                                    <td>${ noTd(d.parentAgentName) }</td>
-                                    <td class="operating"><a class="bg success">编辑</a></td>
+                                    <td>${ noTd(d.mobileNo) }</td>
+                                    <td><input data-id = "${ d.id }" type="checkbox" class="notSelectAll"></td>
                                 </tr>`
                         });
                         list.append(listData);
-
-                        //分页
-                        pageCount = data.data.totalPages;
-                        vpage = pageCount>10?10:pageCount;
-                        if(pageCount>1){
-                            $('.pages').show();
-                            flag = true;
-                            initPagination('#pagination',pageCount,vpage,page + 1,function(num,type){
-                                if(type === 'change'){
-                                    paGe = num - 1;
-                                    list(paGe,pageNum,keyword);
-                                }
-                            });
-                        }else{
-                            if(flag){
-                                paGe = 0;
-                                list(paGe,pageNum,keyword);
-                                flag = false;
-                                $('.pages').hide();
-                            }
-                        }
-                    }else{
-                        $('.pages').hide();
                     }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
             });
-        },
-        pageTo:function(_this){
-            let max = parseInt($(_this).parents('.pageGo').siblings('.pagination').find('li.next').prev().text());
-            let val = parseInt($(_this).siblings('input').val());
-            let num = (val>0?val:1)>max?max:(val>0?val:1);
-            paGe = num - 1;
-            this.list(paGe,pageNum);
-            $(_this).siblings('input').val(num);
-        },
+        }
     };
 
     /*

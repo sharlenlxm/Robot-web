@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>经营概况</title>
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../plugin/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/page.css">
+</head>
+<body>
+    <div class="outermost">
+        <header class="header-title">
+            <i class="fa fa-hand-o-right"></i><b>您的位置:</b> <span>数据统计</span> &gt; <span class="blueChange">经营概况</span>
+        </header>
+    </div>
+    <header class="modal-header">
+        <div class="form-group col-lg-4">
+            <label class="col-lg-3 control-label">代理商选择：</label>
+            <div class="col-lg-7">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </header>
+    <div class="modal-body">
+        <div>
+            <div class="col-lg-12 bg-info ">
+                <h4 class="col-lg-2">实时数据</h4>
+                <div class="col-lg-1 col-lg-offset-9">
+                    <button type="button" class="btn btn-default col-lg-6 col-lg-offset-6 refresh">刷新</button>
+                </div>
+            </div>
+            <section class="col-lg-12">
+                <div class="col-lg-2  col-lg-offset-1">
+                    <div class="infobox text-center">
+                        <p>已售设备数</p>
+                        <p class="selledDeviceCount">888</p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="infobox text-center">
+                        <p>新增关联用户数</p>
+                        <p class="newLinkUserCount">888</p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="infobox text-center">
+                        <p>在线设备数</p>
+                        <p class="onlineDeviceCount">888</p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="infobox text-center">
+                        <p>在线关联用户数</p>
+                        <p class="onlineLinkUserCount">888</p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="infobox text-center">
+                        <p>营业利润</p>
+                        <p class="operatingProfit">888</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div>
+            <div class="col-lg-12 bg-info ">
+                <h4 class="col-lg-2">数据总览</h4>
+                <div class="col-lg-4 col-lg-offset-6 ">
+                    <button value="1" type="button" class="btn btn-default col-lg-offset-3 overview">昨日</button>
+                    <button value="2" type="button" class="btn btn-default overview">本周</button>
+                    <button value="3" type="button" class="btn btn-default overview">本月</button>
+                    <button value="4" type="button" class="btn btn-default overview">本季度</button>
+                    <button value="5" type="button" class="btn btn-default overview">今年</button>
+                </div>
+            </div>
+            <section class="col-lg-12">
+                <div class="col-lg-3 col-lg-offset-1 sales">
+                    <div class="infobox text-center">
+                        <p>销售设备数</p>
+                        <div class="col-lg-12"><div class="col-lg-9">本周期内该指标发展的数量：</div><div class="col-lg-1 newCount">888</div></div>
+                        <div class="col-lg-12"><div class="col-lg-9">本周期数值与上一周期对比的变化率：</div><div class="col-lg-1 changeRatio">888</div><div class="col-lg-1 text-center pn"><i class="overview-font"></i></div></div>
+                        <div class="col-lg-12"><div class="col-lg-9">截至当前该指标累计的数值：</div><div class="col-lg-1 totalCount">888</div></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 associated">
+                    <div class="infobox text-center">
+                        <p>关联用户数</p>
+                        <div class="col-lg-12"><div class="col-lg-9">本周期内该指标发展的数量：</div><div class="col-lg-1 newCount">888</div></div>
+                        <div class="col-lg-12"><div class="col-lg-9">本周期数值与上一周期对比的变化率：</div><div class="col-lg-1 changeRatio">888</div><div class="col-lg-1 text-center pn"><i class="overview-font"></i></div></div>
+                        <div class="col-lg-12"><div class="col-lg-9">截至当前该指标累计的数值：</div><div class="col-lg-1 totalCount">888</div></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 profit">
+                    <div class="infobox text-center">
+                        <p>营业利润</p>
+                        <div class="col-lg-12"><div class="col-lg-9">本周期内该指标发展的数量：</div><div class="col-lg-1 newCount">888</div></div>
+                        <div class="col-lg-12"><div class="col-lg-9">本周期数值与上一周期对比的变化率：</div><div class="col-lg-1 changeRatio">888</div><div class="col-lg-1 text-center pn"><i class="overview-font"></i></div></div>
+                        <div class="col-lg-12"><div class="col-lg-9">截至当前该指标累计的数值：</div><div class="col-lg-1 totalCount">888</div></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="">
+            <div class="col-lg-12 bg-info ">
+                <h4 class="col-lg-2">主要数据分布图</h4>
+                <div class="col-lg-4 col-lg-offset-6">
+                    <div class="col-lg-4">
+                        <select class="form-control col-lg-4 timeSelect">
+                            <option value="1">最近1天</option>
+                            <option value="7">最近7天</option>
+                            <option value="30">最近30天</option>
+                            <!--<option value="">自然日</option>-->
+                            <!--<option value="">自然周</option>-->
+                            <!--<option value="">自然月</option>-->
+                            <option value="customize">自定义时间</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="text" id="startTime" disabled class="form-control chartTime" placeholder="开始时间">
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="text" id="endTime" disabled class="form-control chartTime" placeholder="结束时间">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="col-lg-12">
+            <div class="col-lg-12 graphNav">
+                <div class="col-lg-2 col-lg-offset-1">
+                    <button type="button" class="btn btn-default chartClick active">已售设备数量分布</button>
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-default chartClick">活跃设备数量分布</button>
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-default chartClick">关联用户数量分布</button>
+                </div>
+                <!--<div class="col-lg-2">-->
+                    <!--<button type="button" class="btn btn-default chartClick">活跃关联用户数量分布</button>-->
+                <!--</div>-->
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-default chartClick">关联用户位置分布</button>
+                </div>
+            </div>
+            <div id="graph" class="col-lg-12 graph"></div>
+        </section>
+    </div>
+
+
+    <script type="text/javascript" src="../../plugin/jQuery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../../plugin/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../plugin/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="../../common/baiduAK.js"></script>
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9clyiSsRnNAEXPqyoOoxk7eytFIUd9ww"></script>-->
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/geocoder/v2/?callback=renderReverse&location=39.934,116.329|39.93,116.42|39.90,116.38&output=json&batch=true&pois=1&ak=9clyiSsRnNAEXPqyoOoxk7eytFIUd9ww"></script>-->
+    <script type="text/javascript" src="../../plugin/echarts/dist/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="../../plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../../plugin/bootstrap-datetimepicker/font/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="../../plugin/layer-v3.1.0/layer/layer.js"></script>
+    <script type="text/javascript" src="../../common/common.js"></script>
+    <script type="text/javascript" src="js/overview.js"></script>
+</body>
+</html>

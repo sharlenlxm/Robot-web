@@ -229,3 +229,181 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 /* 代理商管理列表 upgrade.html */
 #addAgents .main-content{ min-height: inherit; }
 .superiorList{ display: none; }
+#companyList{ max-height: 500px;overflow: auto; }
+
+/*  头部导航栏  */
+.blueChange {
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#01bffe), to(#01bffe));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.header-title {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    color: #9ea6b4;
+}
+.header-title i {
+    display: inline-block;
+    margin: 0 12px;
+    width: 14px;
+    height: 14px;
+}
+.header-title b {
+    display: inline-block;
+    margin: 0 18px 0 0;
+    font-weight: 500;
+}
+.header-title span {
+    display: inline-block;
+    margin: 0 8px 0 0;
+}
+.header-title .blueChange {
+    display: inline-block;
+    margin-left: 8px;
+}
+/*  经营概况    */
+.infobox{
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    margin-top: 20px;
+    position: relative;
+    min-height: 140px;
+    box-sizing: border-box;
+    color: #707070;
+    height: 100%;
+    border: 1px solid #999;
+}
+.graphNav{
+    margin: 20px;
+}
+.graph{
+    height: 600px;
+    padding-bottom: 20px;
+}
+.overview-font{
+    width: 12px;
+    height: 14px;
+    display: inline-block;
+    background-size: cover;
+}
+.overview-font.on{
+    background-image: url("../image/on.png");
+}
+.overview-font.under{
+    background-image: url("../image/under.png");
+}
+.chartClick.active{
+    background-color: #d9edf7;
+}
+/*  首页  */
+.index-header {
+    position: absolute;
+    z-index: 1;
+    width: 1920px;
+    height: 100px;
+    background: url(../image/index-header.png) no-repeat 100% 100%;
+    background-size: cover;
+}
+.index-con {
+    position: absolute;
+    left: 260px;
+    top: 98px;
+    width: 1660px;
+    height: 850px;
+}
+.index-con iframe {
+    width: 99.8%;
+    min-height: 99.3%;
+    border: 0;
+    padding: 0  10px 0 0;
+}
+.index h1 {
+    color:#FFF;
+    font-size:24px;
+    font-weight:400;
+    text-align:center;
+    margin-top:80px
+}
+.index h1 a {
+    color:#c12c42;
+    font-size:16px
+}
+.index .accordion {
+    position: absolute;
+    top: 100px;
+    width: 260px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    height: 88.4%;
+    background: #f7f7f7;
+}
+.index .accordion .link {
+    cursor:pointer;
+    display:block;
+    padding:15px 15px 15px 42px;
+    color:#4D4D4D;
+    font-size:14px;
+    font-weight:700;
+    border-bottom:1px solid #CCC;
+    position:relative;
+    -webkit-transition:all .4s ease;
+    -o-transition:all .4s ease;
+    transition:all .4s ease
+}
+.index .accordion li:last-child .link {
+    border-bottom:0
+}
+.index .accordion li i {
+    position:absolute;
+    top:16px;
+    left:12px;
+    font-size:18px;
+    color:#595959;
+    -webkit-transition:all .4s ease;
+    -o-transition:all .4s ease;
+    transition:all .4s ease
+}
+.index .accordion li i.fa-chevron-down {
+    right:12px;
+    left:auto;
+    font-size:16px
+}
+.index .accordion li.open .link {
+    color:#b63b4d
+}
+.index .accordion li.open i {
+    color:#b63b4d
+}
+.index .accordion li.open i.fa-chevron-down {
+    -webkit-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    transform:rotate(180deg)
+}
+.index .submenu {
+    display:none;
+    background:#444359;
+    font-size:14px
+}
+.index .submenu li {
+    border-bottom:1px solid #4b4a5e
+}
+.index .submenu a {
+    display:block;
+    text-decoration:none;
+    color:#d9d9d9;
+    padding:12px;
+    padding-left:42px;
+    -webkit-transition:all .25s ease;
+    -o-transition:all .25s ease;
+    transition:all .25s ease
+}
+.index .submenu a:hover {
+    background:#b63b4d;
+    color:#FFF
+}
