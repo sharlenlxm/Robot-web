@@ -239,7 +239,7 @@
                             litUp(data.data);
                         }
                     }else{
-                        layer.msg(data.message);
+                        // layer.msg(data.message);
                     }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }

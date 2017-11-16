@@ -306,44 +306,44 @@
 
     /*  导入成功导入失败
      ---------------------------------------------------------------------------------------------------------*/
-    function importDetails(data){
-        let pageCount,vpage;   //初始的
-        let html,sum = 1;
-        let import_list = $(".import_list");
-        import_list.empty();
-        $.each(data.data.failList,function(index,val){
-            //阶段 0:群众,10:积极份子,20:重点对象,30预备党员,100党员
-            let type = '';
-            switch(val.type){
-                case 0:type = '群众';
-                    break;
-                case 10:type = '积极份子';
-                    break;
-                case 20:type = '重点对象';
-                    break;
-                case 30:type = '预备党员';
-                    break;
-                case 100:type = '党员';
-                    break;
-            }
-            let joinPartyDate = val.joinPartyDate?val.joinPartyDate:" ";
-            html += '<tr><td>'+ sum +'</td>'+
-                '<td>'+ val.name +'</td>'+
-                '<td>'+ val.examName +'</td>'+
-                '<td>'+ val.examScore +'</td></tr>';
-            // <tr>
-            // <th>姓名</th>
-            // <th>科目</th>
-            // <th>成绩</th>
-            // </tr>
-            sum++;
-        });
-        import_list.append(html);
-
-        // 显示弹出框
-        $("#importModal").addClass("show in");
-    }
-    function importDown(){
-        // 关闭弹出框
-        $("#importModal").removeClass("show in");
-    }
+    // function importDetails(data){
+    //     let pageCount,vpage;   //初始的
+    //     let html,sum = 1;
+    //     let import_list = $(".import_list");
+    //     import_list.empty();
+    //     $.each(data.data.failList,function(index,val){
+    //         //阶段 0:群众,10:积极份子,20:重点对象,30预备党员,100党员
+    //         let type = '';
+    //         switch(val.type){
+    //             case 0:type = '群众';
+    //                 break;
+    //             case 10:type = '积极份子';
+    //                 break;
+    //             case 20:type = '重点对象';
+    //                 break;
+    //             case 30:type = '预备党员';
+    //                 break;
+    //             case 100:type = '党员';
+    //                 break;
+    //         }
+    //         let joinPartyDate = val.joinPartyDate?val.joinPartyDate:" ";
+    //         html += '<tr><td>'+ sum +'</td>'+
+    //             '<td>'+ val.name +'</td>'+
+    //             '<td>'+ val.examName +'</td>'+
+    //             '<td>'+ val.examScore +'</td></tr>';
+    //         // <tr>
+    //         // <th>姓名</th>
+    //         // <th>科目</th>
+    //         // <th>成绩</th>
+    //         // </tr>
+    //         sum++;
+    //     });
+    //     import_list.append(html);
+    //
+    //     // 显示弹出框
+    //     $("#importModal").addClass("show in");
+    // }
+    // function importDown(){
+    //     // 关闭弹出框
+    //     $("#importModal").removeClass("show in");
+    // }

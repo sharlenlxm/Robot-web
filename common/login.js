@@ -1,11 +1,11 @@
-var appkey = 'xddb';//应用的appkey
+var appkey = 'xiaoxi';//应用的appkey
 // var appkey = 'xdrobot';//应用的appkey
 var cas_sever = 'http://192.168.1.15:8445';
 //cas服务器地址
 var urlArguments = parseQueryString(location.href);//获取URL的参数JSON格式
 var reUrl = location.href.split('?')[0];//本项目的地址(回调地址)
-var login_url=cas_sever+'/cas-server/login?service='+reUrl+'&clientId='+appkey;//登录
-var logout_url=cas_sever+'/cas-server/logout?service='+reUrl;//登出
+var login_url = cas_sever+'/cas-server/login?service='+reUrl+'&clientId=' + appkey;//登录
+var logout_url = cas_sever+'/cas-server/logout?service='+reUrl;//登出
 
 
 (function (){//login
