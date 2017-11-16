@@ -17,6 +17,7 @@
 
     let list = {
         list:function(page,size){
+            let self = this;
             let pageCount,vpage;   //初始的
             //开始时显示数据
             let dataObject = {
@@ -65,7 +66,7 @@
                         }else{
                             if(flag){
                                 paGe = 0;
-                                list.list(paGe,pageNum);
+                                self.list(paGe,pageNum);
                                 flag = false;
                                 $('.pages').hide();
                             }
@@ -81,7 +82,7 @@
             const max = parseInt($(_this).parents('.pageGo').siblings('.pagination').find('li.next').prev().text());
             const val = parseInt($(_this).siblings('input').val());
             const num = (val>0?val:1)>max?max:(val>0?val:1);
-            paGe = num - 1;
+            paGe = num;
             this.list(paGe,pageNum);
             $(_this).siblings('input').val(num);
         }

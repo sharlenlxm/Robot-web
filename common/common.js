@@ -3,8 +3,8 @@
     *   url：ip
     * */
     var url = ""
-        ,robotDevice = "/robot-device"  // 设备
-        // ,robotDevice = ""  // 设备
+        // ,robotDevice = "/robot-device"  // 设备
+        ,robotDevice = ""  // 设备
         ,robotAgent = "/robot-agent"  // 代理商
         ,robotCore = "/robot-core"   // 公共
         // ,robotAgent = ""  // 代理商
@@ -276,6 +276,7 @@
     };
     //分页初始化
     function initPagination(id,total,vpage,curpage,callback) {
+        console.log(curpage)
         $.jqPaginator(id, {
             totalPages: total,
             visiblePages: vpage,

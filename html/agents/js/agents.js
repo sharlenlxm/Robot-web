@@ -175,7 +175,7 @@
             let max = parseInt($(_this).parents('.pageGo').siblings('.pagination').find('li.next').prev().text());
             let val = parseInt($(_this).siblings('input').val());
             let num = (val>0?val:1)>max?max:(val>0?val:1);
-            paGe = num - 1;
+            paGe = num;
             this.list(paGe,pageNum);
             $(_this).siblings('input').val(num);
         },
