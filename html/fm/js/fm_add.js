@@ -1,6 +1,7 @@
 $(document).ready(function(){
     equipment.types("#equipmentType","#equipmentModel",0);  // 设备类型列表
-    agents("#agentId",0);
+    agents("#agentId",0);   // 代理商
+    companyFm("#oemId");   // OME厂商
 
     const newForm = $("#newForm");
     newForm.on("click","#determine",function(){
@@ -31,3 +32,26 @@ $(document).ready(function(){
         }
     })
 });
+
+
+
+function companyFm(el){
+    $.ajax({
+        type:'get',
+        url: url + robotAgent + version1 +'/agent/firm/list.json',
+        data:null,
+        dataType:'json',
+        success:function(data){
+            const list = $(el);  //将选择器赋值给常量
+            list.empty();  //清空
+            if(data.code === 200){
+                let listData = '';
+                $.each(data.data,function(i,d){
+                    listData += `<option value="${ d.id }">${ d.name }</option>`;
+                });
+                list.append(listData);
+            }
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
+    });
+}

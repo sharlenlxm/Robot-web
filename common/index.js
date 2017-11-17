@@ -32,7 +32,8 @@ $(function() {
      *   左侧伸缩导航栏路径
      *   signOut：控制用iform登录，还是直接跳转到新页面
      * */
-    let commonUrl = "http://192.168.1.140:6366";
+    // let commonUrl = "http://192.168.1.14:8010";
+    let commonUrl = "http://192.168.1.14:8010";
 
     let url = [
         [
@@ -93,10 +94,10 @@ $(function() {
             //     "name":"角色权限修改",
             //     "url":commonUrl + "/page/character/character_edit.html",
             // },
-            {
-                "name":"操作日志管理",
-                // "url":commonUrl + "/page/account/account.html",
-            },
+            // {
+            //     "name":"操作日志管理",
+            //     // "url":commonUrl + "/page/account/account.html",
+            // },
             {
                 "name":"修改密码",
                 "signOut": true ,

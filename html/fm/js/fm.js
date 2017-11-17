@@ -194,8 +194,10 @@
             });
             $(_this).val("");   //清空数据，以防noChange内容不变时，不执行函数
         },
+        // http://robotqn.xdaocloud.com/2017/11/17/bf4b420f-c728-4fc0-824f-f75e1987e989.xlsx
         templateExport:function(_this){
-            $(_this).attr({"href": url + robotDevice + version1 + "/device/export" });
+            // $(_this).attr({"href": url + robotDevice + version1 + "/device/export" });
+            $(_this).attr("href","http://robotqn.xdaocloud.com/2017/11/17/bf4b420f-c728-4fc0-824f-f75e1987e989.xlsx")
         }
     };
 
