@@ -10,7 +10,7 @@
         // ,robotAgent = ""  // 代理商
         ,version1 = "/api/v1"   // 版本
         ,userId = "5021"
-        // ,agentId = "1762";
+        ,agentId = "100";
 
 
 
