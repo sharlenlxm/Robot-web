@@ -38,14 +38,14 @@
                         let listData = '';
                         $.each(data.data.items,function(i,d){
                             listData += `<tr>
-                                            <td><input data-id="${ d.id }" type="checkbox" class="notSelectAll"></td>
+                                            <td><input data-status="${ d.status }" data-id="${ d.id }" type="checkbox" class="notSelectAll"></td>
                                             <td>${ i + 1 }</td>
                                             <td>${ noTd(d.deviceSequence) }</td>
                                             <td>${ noTd(d.userAcc) }</td>
                                             <td>${ noTd(d.userName) }</td>
                                             <td>${ noTd(d.createTime) }</td>
                                             <td>${ noTd(d.correlationType) }</td>
-                                            <td>${ d.manager?'已启用':d.manager === false?'已停用':'-' }</td>
+                                            <td>${ d.manager?'是':d.manager === false?'否':'-' }</td>
                                             <td>${ d.status?'已启用':d.status === false?'已停用':'-' }</td>
                                         </tr>`;
                         });
@@ -111,6 +111,8 @@
             modify.transfer(id,status);
         },
         transfer:function(id,status){
+
+
             $.ajax({
                 type:'post',
                 url: url + robotDevice + version1 + '/device/user/modifyStatus',
