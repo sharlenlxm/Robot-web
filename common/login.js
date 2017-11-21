@@ -1,4 +1,4 @@
-var appkey = 'xiaoxi';//应用的appkey
+var appkey = 'fd5bc46a86204ffabba76b6843458472';//应用的appkey
 // var appkey = 'xdrobot';//应用的appkey
 var cas_sever = 'http://192.168.1.15:8445';
 //cas服务器地址
