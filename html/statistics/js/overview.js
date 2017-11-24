@@ -5,6 +5,8 @@
         $("#selectAge").val(obtain("overviewName"));
     }
 
+
+
     $(function(){
         // 调用关联时间初始化
         associationTime("#startTime","#endTime");
@@ -240,17 +242,16 @@
                 dataType:'json',
                 success:function(data){
                     if(data.code === 200){
-                        // console.log(data.data);
                         if(self.index <= 2){
+                            $("#graph").removeClass("hidden").siblings("#graphB").addClass("hidden");
                             conversion(data.data);
-                            $("#graph").removeClass("black");
                         }else{
+                            $("#graphB").removeClass("hidden").siblings("#graph").addClass("hidden");
                             litUp(data.data);
-                            $("#graph").addClass("black");
                         }
                     }else{
-                        dotMap()
-                        // layer.msg(data.message);
+                        $("#graph").removeClass("hidden").siblings("#graphB").addClass("hidden");
+                        dotMap();
                     }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
@@ -761,7 +762,7 @@
                                 "name":d.province+d.city+d.district,
                                 "adcode":d.adcode,
                                 "district":d.district,
-                                "value":[b.split("|")[i].split(",")[1],b.split("|")[i].split(",")[0],a[i].count*100]
+                                "value":[b.split("|")[i].split(",")[1],b.split("|")[i].split(",")[0],a[i].count]
                             };
                             all.push(pr);
                         });
@@ -779,7 +780,6 @@
         }
 
     }
-
 
     /*
     *   分布图，需要转化格式；
@@ -971,7 +971,7 @@
     *   点星图
     * */
     function litUp(data){
-        var myChart = echarts.init(document.getElementById('graph'));
+        var myChart = echarts.init(document.getElementById('graphB'));
         // 例子
         // $.getJSON('../../../plugin/echarts/dist/litData.json', function(weiboData){
         //     weiboData = weiboData.map(function(serieData, idx) {
@@ -1002,43 +1002,44 @@
         }else{
             weiboData[2] = data;
         }
-            myChart.setOption(option = {
-                title: {
-                    text: '活跃关联用户数量分布',
-                    left: 'center',
-                    top: 'top',
-                    textStyle: {
-                        color: '#fff'
+
+        option = {
+            title: {
+                text: '活跃关联用户数量分布',
+                left: 'center',
+                top: 'top',
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            tooltip: {},
+            legend: {
+                left: 'left',
+                // data: ['强', '中', '弱'],
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+            geo: {
+                map: 'china',
+                roam: true,
+                label: {
+                    emphasis: {
+                        show: false
                     }
                 },
-                tooltip: {},
-                legend: {
-                    left: 'left',
-                    // data: ['强', '中', '弱'],
-                    textStyle: {
-                        color: '#ccc'
-                    }
-                },
-                geo: {
-                    map: 'china',
-                    roam: true,
-                    label: {
-                        emphasis: {
-                            show: false
-                        }
+                itemStyle: {
+                    normal: {
+                        areaColor: '#323c48',
+                        borderColor: '#111'
                     },
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#323c48',
-                            borderColor: '#111'
-                        },
-                        emphasis: {
-                            areaColor: '#2a333d'
-                        }
+                    emphasis: {
+                        areaColor: '#2a333d'
                     }
-                },
-                series: [
-                    {
+                }
+            },
+            series: [
+                {
                     name: '弱',
                     type: 'scatterGL',
                     coordinateSystem: 'geo',
@@ -1050,32 +1051,33 @@
                     },
                     data: weiboData[0]
                 }
-                    , {
-                        name: '中',
-                        type: 'scatterGL',
-                        coordinateSystem: 'geo',
-                        symbolSize: 1,
-                        itemStyle: {
-                            shadowBlur: 2,
-                            shadowColor: 'rgba(14, 241, 242, 0.8)',
-                            color: 'rgba(14, 241, 242, 0.8)'
-                        },
-                        data: weiboData[1]
+                , {
+                    name: '中',
+                    type: 'scatterGL',
+                    coordinateSystem: 'geo',
+                    symbolSize: 1,
+                    itemStyle: {
+                        shadowBlur: 2,
+                        shadowColor: 'rgba(14, 241, 242, 0.8)',
+                        color: 'rgba(14, 241, 242, 0.8)'
                     },
-                    {
-                        name: '强',
-                        type: 'scatterGL',
-                        coordinateSystem: 'geo',
-                        symbolSize: 1,
-                        itemStyle: {
-                            shadowBlur: 2,
-                            shadowColor: 'rgba(255, 255, 255, 0.8)',
-                            color: 'rgba(255, 255, 255, 0.8)'
-                        },
-                        data: weiboData[2]
-                    }
-                ]
-            });
+                    data: weiboData[1]
+                },
+                {
+                    name: '强',
+                    type: 'scatterGL',
+                    coordinateSystem: 'geo',
+                    symbolSize: 1,
+                    itemStyle: {
+                        shadowBlur: 2,
+                        shadowColor: 'rgba(255, 255, 255, 0.8)',
+                        color: 'rgba(255, 255, 255, 0.8)'
+                    },
+                    data: weiboData[2]
+                }
+            ]
+        };
+        myChart.setOption(option);
 
         // });
     }
