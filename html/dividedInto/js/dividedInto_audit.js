@@ -2,6 +2,9 @@
     $(document).ready(function(){
         list.list(paGe,pageNum);
 
+        // 调用关联时间初始化
+        associationTime("#startTime","#endTime");
+
         // 搜索
         $("#search").on("click",function(){
             list.list(paGe,pageNum);
