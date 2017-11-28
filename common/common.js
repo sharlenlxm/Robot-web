@@ -9,8 +9,9 @@
         ,robotCore = "/robot-core"   // 公共
         // ,robotAgent = ""  // 代理商
         ,version1 = "/api/v1"   // 版本
-        ,userId = "5021"
-        ,agentId = "100";
+        ,userId = "5021",
+        agentId = "100",
+        commomId = "http://192.168.1.15:8445";
 
 
 

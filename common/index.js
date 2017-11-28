@@ -128,5 +128,12 @@ $(function() {
             $("#iframe").attr("src",urlUrl);
         }
     });
+
+    $(".signOut").on("click",function(){
+        window.location.href = commomId + "/cas-server/logout"
+    });
+    $(".user-logo .user-pop").on("click",function(){
+        $(".pop").toggleClass("hide");
+    });
 });
 
