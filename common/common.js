@@ -265,7 +265,7 @@
     }
     /*表格内容非空判断*/
     function noTd(elem){
-        return elem?elem:'-'
+        return elem?elem==="null"?"-":elem:'-';
     }
     //去掉字符串首空格
     String.prototype.ltrim=function(){

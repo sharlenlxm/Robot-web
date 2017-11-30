@@ -41,8 +41,8 @@
                                             <td><input data-status="${ d.status }" data-id="${ d.id }" type="checkbox" class="notSelectAll"></td>
                                             <td>${ i + 1 }</td>
                                             <td>${ noTd(d.deviceSequence) }</td>
-                                            <td>${ noTd(d.userAcc) }</td>
                                             <td>${ noTd(d.userName) }</td>
+                                            <td>${ noTd(d.nickname) }</td>
                                             <td>${ noTd(d.createTime) }</td>
                                             <td>${ noTd(d.correlationType) }</td>
                                             <td>${ d.manager?'是':d.manager === false?'否':'-' }</td>
