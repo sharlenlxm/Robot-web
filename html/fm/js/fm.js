@@ -78,6 +78,7 @@
                     if(data.code === 200){
                         let listData = '';
                         $.each(data.data.items,function(i,d){
+                            const fmRed = d.online?"":"fmRed";
                             listData += `<tr>
                                             <td><input data-id="${ d.id }" type="checkbox" class="notSelectAll"></td>
                                             <td>${ i + 1 }</td>
@@ -89,7 +90,7 @@
                                             <td>${ noTd(d.typeName) }</td>
                                             <td>${ noTd(d.modelName) }</td>
                                             <td>${ noTd(d.version) }</td>
-                                            <td>${ d.online?'在线':'离线' }</td>
+                                            <td class="${ fmRed }">${ d.online?'在线':'离线' }</td>
                                             <td>${ noTd(d.agentName) }</td>
                                             <td>${ noTd(d.userName) }</td>
                                             <td>${ noTd(d.createTime) }</td>
