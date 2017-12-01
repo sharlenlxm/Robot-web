@@ -82,10 +82,10 @@
                             listData += `<tr>
                                             <td><input data-id="${ d.id }" type="checkbox" class="notSelectAll"></td>
                                             <td>${ i + 1 }</td>
-                                            <td>${ noTd(d.id) }</td>
+                                            <!--<td>${ noTd(d.id) }</td>-->
                                             <td>${ noTd(d.deviceSequence) }</td>
                                             <td>${ noTd(d.mac) }</td>
-                                            <td>${ noTd(d.appKey) }</td>
+                                            <!--<td>${ noTd(d.appKey) }</td>-->
                                             <td>${ noTd(d.deviceName) }</td>
                                             <td>${ noTd(d.typeName) }</td>
                                             <td>${ noTd(d.modelName) }</td>
