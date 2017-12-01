@@ -69,7 +69,7 @@
 .pageGo{display: inline-block;vertical-align: top;margin-top: 21px;}
 .pageGo input[type=number]{display: inline-block;width: 50px;height: 30px;text-align: center;line-height: 30px;margin:0 2px;border:1px solid #ddd;color: #333;border-radius: 4px;}
 .pageGo input[type=button]{height: 30px;width: 40px;background-color: #337ab7;color:#fff;border:0px none;border-radius: 3px;}
-
+.pageSize { display: inline-block;vertical-align: top;margin: 20px 0 0 20px; width: 90px; }
 
 /*添加用户*/
 .add-content{padding:10px 20px 0 20px;min-height: 755px;background-color: #fff; }

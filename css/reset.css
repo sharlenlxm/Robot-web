@@ -53,6 +53,7 @@ td,th{padding:0}
 .tr{text-align:right;}
 .dis{display:block;}
 .undis{display:none;}
+.undisIpt{display:none;!important;}
 .clear{ clear:both;line-height:0px;height:0px;font-size:0px;width:0px;}
 .clearfix { *zoom:1; }
 .clearfix:before { display:table; content:""; }

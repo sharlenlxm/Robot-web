@@ -5,10 +5,16 @@
 
     // 调用关联时间初始化
     associationTime("#startTime","#endTime");
+    $(".pageSize").siblings().hide();
 
     $(document).ready(function(){
         list.list(paGe,pageNum);
         equipment.types("#equipmentType","#equipmentModel",1);  // 设备类型列表
+
+        $(".pageSize select").on("change",function(){
+            pageNum = $(this).val();
+            list.list(paGe,pageNum);
+        });
 
         // 搜索
         $("#search").on("click",function(){
@@ -109,6 +115,7 @@
                         vpage = pageCount>10?10:pageCount;
                         if(pageCount>1){
                             $('.pages').show();
+                            $(".pageSize").siblings().show();
                             flag = true;
                             initPagination('#pagination',pageCount,vpage,paGe,function(num,type){
                                 if(type === 'change'){
@@ -119,13 +126,13 @@
                         }else{
                             if(flag){
                                 paGe = 1;
-                                list.list(paGe,pageNum);
+                                self.list(paGe,pageNum);
                                 flag = false;
-                                $('.pages').hide();
+                                $(".pageSize").siblings().hide();
                             }
                         }
                     }else{
-                        $('.pages').hide();
+                         $('.pages').hide();
                     }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){ beingGiven(XMLHttpRequest, textStatus, errorThrown)  }
